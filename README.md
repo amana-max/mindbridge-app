@@ -1,10 +1,10 @@
-🌿 MindBridge — Mental Health Support App
+###🌿 MindBridge — Mental Health Support App
 "Every mind deserves a bridge."
 A concept and frontend prototype for a student-focused mental health support app — built to make counselling private, accessible, and completely free for students under 18.
-💡 About the Project
+##💡 About the Project
 MindBridge is a mobile mental health support app designed specifically for students. It delivers private, affordable counselling through a stigma-free interface available 24/7.
 This repository contains the interactive frontend prototype built with HTML, CSS, and JavaScript.
-✨ Features
+##✨ Features
 Feature
 Description
 💬 Anonymous Chat
@@ -22,7 +22,7 @@ HTML5
 CSS3 (custom properties, grid, animations)
 Vanilla JavaScript (Intersection Observer API)
 Google Fonts — Playfair Display & DM Sans
-🚀 Getting Started
+##🚀 Getting Started
 Clone the repository
 Bash
 Open MindBridge.html in any browser — no installation needed!
@@ -33,10 +33,10 @@ Open MindBridge.html in any browser — no installation needed!
 [ ] Firebase backend integration
 [ ] Mobile app (Flutter)
 [ ] Pilot launch in 5 schools
-👩‍💻 About Me
+#👩‍💻 About Me
 Amana km — BTech student building skills in AI, Data Science & Programming.
 📍 Malayalam, Kerala, India
 📧 amanaamanath33@gmail.com
-📄 License
-This project is licensed under the MIT License.
+## 📄 License
+No license yet — personal student project..
 Built with 💚 for every student who needed someone to talk to.
