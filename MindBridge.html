@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MindBridge – Mental Health Support App</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --cream: #f5f0e8;
+    --sage: #4a7c59;
+    --warm: #c9622f;
+    --gold: #d4a847;
+    --mist: #e8ede6;
+    --deep: #1a2e1e;
+    --blush: #e8c5b0;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: var(--deep);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 70% 50%, #2d5c3a44 0%, transparent 70%);
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    z-index: 2;
+  }
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 6vw, 88px);
+    line-height: 1.0;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--sage);
+  }
+  .slogan {
+    font-size: 15px;
+    color: #a0b8a5;
+    letter-spacing: 1px;
+    margin-bottom: 48px;
+    line-height: 1.6;
+    max-width: 360px;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--sage);
+    color: var(--cream);
+    padding: 16px 32px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: background .3s;
+    width: fit-content;
+  }
+  .hero-cta:hover { background: #3a6148; }
+  .hero-cta svg { width: 18px; height: 18px; }
+
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    padding: 60px;
+  }
+  .hero-visual {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #4a7c5922, #d4a84722, #c9622f22, #4a7c5922);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: slowspin 20s linear infinite;
+  }
+  @keyframes slowspin { to { transform: rotate(360deg); } }
+  .hero-visual-inner {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: var(--deep);
+    border: 1px solid #4a7c5955;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slowspin 20s linear infinite reverse;
+  }
+  .hero-icon { font-size: 72px; }
+
+  /* ─── NAV DOTS ──────────────────────────────── */
+  .nav-strip {
+    background: var(--ink);
+    padding: 20px 80px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+  }
+  .nav-strip a {
+    color: #888;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    white-space: nowrap;
+    transition: all .2s;
+  }
+  .nav-strip a:hover { color: var(--cream); border-color: #4a7c59; }
+
+  /* ─── SECTIONS ──────────────────────────────── */
+  section {
+    padding: 100px 80px;
+  }
+  section:nth-child(even) { background: var(--mist); }
+  section:nth-child(odd) { background: var(--cream); }
+
+  .sec-label {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 16px;
+  }
+  .sec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 60px);
+    line-height: 1.1;
+    margin-bottom: 48px;
+    max-width: 700px;
+  }
+
+  /* ─── ROADMAP ───────────────────────────────── */
+  #roadmap { background: var(--deep) !important; }
+  #roadmap .sec-title { color: var(--cream); }
+  #roadmap .sec-label { color: var(--gold); }
+  .roadmap-track {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .roadmap-track::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--sage), var(--gold), var(--warm));
+  }
+  .roadmap-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 32px;
+    padding: 32px 0;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all .6s ease;
+    border-bottom: 1px solid #ffffff0f;
+  }
+  .roadmap-item.visible { opacity: 1; transform: none; }
+  .rm-dot {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--deep);
+    border: 2px solid var(--sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .rm-content { padding-top: 8px; }
+  .rm-phase {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .rm-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+  .rm-desc {
+    font-size: 14px;
+    color: #8aaa90;
+    line-height: 1.8;
+    max-width: 600px;
+  }
+
+  /* ─── PROBLEM ───────────────────────────────── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .problem-card {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 40px 36px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all .5s ease;
+  }
+  .problem-card.visible { opacity: 1; transform: none; }
+  .problem-card:nth-child(2) { background: #1a1a1a; }
+  .problem-card:nth-child(3) { background: #0f0f0f; }
+  .prob-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    color: #ffffff10;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .prob-title { font-size: 18px; font-weight: 500; margin-bottom: 12px; }
+  .prob-desc { font-size: 13px; color: #888; line-height: 1.8; }
+
+  /* ─── IDEA ──────────────────────────────────── */
+  .idea-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .idea-badge {
+    display: inline-block;
+    background: var(--sage);
+    color: white;
+    padding: 6px 16px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .idea-text { font-size: 16px; line-height: 2; color: #444; }
+  .feature-list { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .feat {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px;
+    background: white;
+    border-left: 3px solid var(--sage);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all .5s ease;
+  }
+  .feat.visible { opacity: 1; transform: none; }
+  .feat-icon { font-size: 24px; flex-shrink: 0; }
+  .feat-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .feat-desc { font-size: 12px; color: #777; line-height: 1.6; }
+
+  /* ─── EXECUTION ─────────────────────────────── */
+  .exec-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .exec-step {
+    padding: 48px 32px;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all .5s ease;
+  }
+  .exec-step.visible { opacity: 1; transform: none; }
+  .exec-step::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--sage);
+    transform: scaleX(0);
+    transition: transform .4s ease;
+  }
+  .exec-step:hover::after { transform: scaleX(1); }
+  .exec-step:nth-child(2)::after { background: var(--gold); }
+  .exec-step:nth-child(3)::after { background: var(--warm); }
+  .exec-step:nth-child(4)::after { background: var(--sage); }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    color: #f0f0f0;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .step-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .step-desc { font-size: 13px; color: #666; line-height: 1.8; }
+
+  /* ─── MARKET ────────────────────────────────── */
+  .market-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .market-col { padding: 60px 48px; }
+  .market-col.adv { background: var(--sage); color: white; }
+  .market-col.dis { background: var(--blush); }
+  .market-col h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+  .market-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .market-list li {
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .market-list li::before { content: '→'; font-weight: 700; flex-shrink: 0; }
+  .market-col.adv .market-list li { color: #d4eed9; }
+
+  /* ─── OVERCOME ──────────────────────────────── */
+  .overcome-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .ov-card {
+    padding: 40px 32px;
+    border: 1px solid #ddd;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all .5s ease;
+  }
+  .ov-card.visible { opacity: 1; transform: none; }
+  .ov-challenge {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 12px;
+  }
+  .ov-title { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+  .ov-solution { font-size: 13px; color: #666; line-height: 1.8; }
+
+  /* ─── CONCLUSION ────────────────────────────── */
+  #conclusion {
+    background: var(--deep) !important;
+    text-align: center;
+    padding: 120px 80px;
+  }
+  #conclusion .sec-label { color: var(--gold); }
+  #conclusion .sec-title { color: var(--cream); margin: 0 auto 40px; text-align: center; }
+  .conclusion-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 38px);
+    font-style: italic;
+    color: #8aaa90;
+    max-width: 800px;
+    margin: 0 auto 48px;
+    line-height: 1.5;
+  }
+  .team-chips {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 48px;
+  }
+  .chip {
+    padding: 10px 24px;
+    border: 1px solid #4a7c5966;
+    color: #8aaa90;
+    font-size: 13px;
+    letter-spacing: 1px;
+    border-radius: 2px;
+  }
+
+  /* ─── FOOTER ────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: #555;
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  /* ─── RESPONSIVE ────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    section { padding: 70px 32px; }
+    .problem-grid, .exec-steps { grid-template-columns: 1fr; }
+    .market-split, .idea-split { grid-template-columns: 1fr; }
+    .overcome-grid { grid-template-columns: 1fr; }
+    .nav-strip { padding: 16px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <h1>Mind<em>Bridge</em></h1>
+    <p class="slogan">
+      "Your mind matters — because a healthy mind builds a better world."<br>
+      A mental health support app for students who deserve to be heard.
+    </p>
+    <a href="#roadmap" class="hero-cta">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+      View Roadmap
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-visual-inner">
+        <div class="hero-icon">🧠</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-strip">
+  <a href="#problem">Problem</a>
+  <a href="#idea">Our Idea</a>
+  <a href="#execution">Execution</a>
+  <a href="#advantages">Market</a>
+  <a href="#overcome">Overcome</a>
+  <a href="#conclusion">Conclusion</a>
+  <a href="#roadmap">Roadmap</a>
+</nav>
+
+<!-- PROBLEM STATEMENT -->
+<section id="problem">
+  <p class="sec-label">01 — The Challenge</p>
+  <h2 class="sec-title">Why students suffer in silence</h2>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="prob-num">01</div>
+      <div class="prob-title">Stigma & Fear</div>
+      <div class="prob-desc">Students avoid seeking help due to fear of judgment and social stigma. Mental health is still taboo in many school communities, leaving thousands to cope alone.</div>
+    </div>
+    <div class="problem-card">
+      <div class="prob-num">02</div>
+      <div class="prob-title">Cost Barrier</div>
+      <div class="prob-desc">Professional counselling is expensive and inaccessible. Most students under 18 have no financial independence, making traditional therapy out of reach.</div>
+    </div>
+    <div class="problem-card">
+      <div class="prob-num">03</div>
+      <div class="prob-title">Family Gap</div>
+      <div class="prob-desc">Many families don't recognise or validate the need for psychological support. Without a trusted outlet, students are at risk of serious self-harm or worse.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR IDEA -->
+<section id="idea">
+  <p class="sec-label">02 — Our Idea</p>
+  <div class="idea-split">
+    <div>
+      <h2 class="sec-title">A safe space, always open</h2>
+      <span class="idea-badge">MindBridge App</span>
+      <p class="idea-text">
+        MindBridge is a mobile mental health support app built specifically for students. It delivers private, affordable counselling — completely free for users under 18 — through an intuitive, stigma-free interface available 24/7.
+      </p>
+    </div>
+    <div class="feature-list">
+      <div class="feat">
+        <div class="feat-icon">💬</div>
+        <div>
+          <div class="feat-title">24/7 Anonymous Chat Support</div>
+          <div class="feat-desc">Talk to trained counsellors or peer supporters any time, fully anonymous — no names, no judgment.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">📅</div>
+        <div>
+          <div class="feat-title">Easy Consultation Booking</div>
+          <div class="feat-desc">Schedule one-on-one sessions with certified therapists in under 60 seconds.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🆘</div>
+        <div>
+          <div class="feat-title">Emergency Help Button</div>
+          <div class="feat-desc">One tap connects a student to crisis support and notifies a trusted emergency contact.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🎓</div>
+        <div>
+          <div class="feat-title">Free for Under-18s</div>
+          <div class="feat-desc">All core features are completely free for school students — funded through institutional partnerships.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXECUTION -->
+<section id="execution">
+  <p class="sec-label">03 — Idea Execution</p>
+  <h2 class="sec-title">From concept to impact</h2>
+  <div class="exec-steps">
+    <div class="exec-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Research & Validation</div>
+      <div class="step-desc">Survey students across schools and colleges to map pain points, preferred features, and privacy needs. Partner with school counsellors.</div>
+    </div>
+    <div class="exec-step">
+      <div class="step-num">02</div>
+      <div class="step-title">App Development</div>
+      <div class="step-desc">Build a secure, HIPAA-compliant mobile app with AI-assisted triage, counsellor matching, and an anonymous profile system.</div>
+    </div>
+    <div class="exec-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Pilot Launch</div>
+      <div class="step-desc">Roll out in 5 schools, onboard 20 certified counsellors, collect user feedback and refine UX for safety and trust.</div>
+    </div>
+    <div class="exec-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Scale & Sustain</div>
+      <div class="step-desc">Expand to colleges, partner with NGOs, government health programs and universities. Freemium model for adults sustains free access for students.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET ADVANTAGES & DISADVANTAGES -->
+<section id="advantages" style="padding: 0 !important; background: transparent !important;">
+  <div class="market-split">
+    <div class="market-col adv">
+      <p class="sec-label" style="color:#a8d5af;">04a — Market Advantages</p>
+      <h3>Why we win</h3>
+      <ul class="market-list">
+        <li>Massive underserved student market with almost no affordable digital-first competitors</li>
+        <li>Free tier for under-18s creates trust, loyalty and viral school-to-school growth</li>
+        <li>Anonymous model removes the biggest barrier — fear of being seen</li>
+        <li>Low marginal cost via AI pre-screening reduces counsellor load significantly</li>
+        <li>Government and NGO partnership potential for subsidised rollout</li>
+        <li>First-mover advantage in school mental health apps in this region</li>
+      </ul>
+    </div>
+    <div class="market-col dis">
+      <p class="sec-label" style="color: var(--warm);">04b — Market Disadvantages</p>
+      <h3>Honest challenges</h3>
+      <ul class="market-list">
+        <li>Trust-building takes time — parents and institutions may resist adoption</li>
+        <li>Sustaining a free model requires strong institutional funding and partnerships</li>
+        <li>Recruiting and retaining certified counsellors at scale is cost-intensive</li>
+        <li>Data privacy regulations for minors are strict and require legal expertise</li>
+        <li>Mental health crises carry liability risks requiring robust safeguarding protocols</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- OVERCOME -->
+<section id="overcome">
+  <p class="sec-label">05 — Overcoming Barriers</p>
+  <h2 class="sec-title">Every challenge, solved</h2>
+  <div class="overcome-grid">
+    <div class="ov-card">
+      <div class="ov-challenge">Challenge → Trust</div>
+      <div class="ov-title">School Partnerships First</div>
+      <div class="ov-solution">Launch through school partnerships with official endorsement. Transparent data policies and parental opt-in remove institutional hesitation from day one.</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-challenge">Challenge → Funding</div>
+      <div class="ov-title">Freemium + Grants</div>
+      <div class="ov-solution">Adult users and enterprises pay a subscription. Government mental health grants and CSR funding from corporations fill the gap for free student access.</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-challenge">Challenge → Counsellors</div>
+      <div class="ov-title">AI Triage + Volunteer Network</div>
+      <div class="ov-solution">AI handles mood tracking and low-risk check-ins, freeing certified counsellors for critical cases. A volunteer peer-support network scales coverage rapidly.</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-challenge">Challenge → Privacy Law</div>
+      <div class="ov-title">Compliance by Design</div>
+      <div class="ov-solution">Built from the ground up to comply with PDPA/GDPR for minors. End-to-end encryption, on-device data storage where possible, and legal advisory board.</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-challenge">Challenge → Crisis Risk</div>
+      <div class="ov-title">Tiered Safety Protocol</div>
+      <div class="ov-solution">All counsellors are trained in crisis response. The emergency button auto-escalates to certified crisis counsellors and can alert parents or emergency services.</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-challenge">Challenge → Stigma</div>
+      <div class="ov-title">Normalise Through Education</div>
+      <div class="ov-solution">In-app mental health literacy content destigmatises help-seeking. School ambassador programs make using MindBridge as normal as using a study app.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <p class="sec-label">06 — Project Roadmap</p>
+  <h2 class="sec-title">The path forward</h2>
+  <div class="roadmap-track">
+    <div class="roadmap-item">
+      <div class="rm-dot">🔍</div>
+      <div class="rm-content">
+        <div class="rm-phase">Phase 1 · Months 1–2</div>
+        <div class="rm-title">Discovery & Research</div>
+        <div class="rm-desc">Conduct student surveys, interview school counsellors, analyse competitor apps, and define core user personas. Validate the problem and refine the solution scope.</div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-dot">🎨</div>
+      <div class="rm-content">
+        <div class="rm-phase">Phase 2 · Months 3–4</div>
+        <div class="rm-title">Design & Prototype</div>
+        <div class="rm-desc">Create wireframes, design a privacy-first UI/UX, and build a clickable prototype. Test with 30 students for usability and comfort. Iterate on feedback.</div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-dot">⚙️</div>
+      <div class="rm-content">
+        <div class="rm-phase">Phase 3 · Months 5–7</div>
+        <div class="rm-title">Development & Security</div>
+        <div class="rm-desc">Build the full app with encrypted chat, counsellor portal, AI mood triage, emergency system, and booking engine. Full security audit for PDPA compliance.</div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-dot">🚀</div>
+      <div class="rm-content">
+        <div class="rm-phase">Phase 4 · Month 8</div>
+        <div class="rm-title">Pilot Launch — 5 Schools</div>
+        <div class="rm-desc">Soft launch in 5 partner schools. Onboard 20 counsellors. Monitor engagement, crisis response times, and student well-being outcomes over 8 weeks.</div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-dot">📈</div>
+      <div class="rm-content">
+        <div class="rm-phase">Phase 5 · Month 10–12</div>
+        <div class="rm-title">Scale & Partnerships</div>
+        <div class="rm-desc">Expand to 50 schools and 5 colleges. Apply for government mental health grants. Launch awareness campaigns. Onboard NGO and corporate sponsors.</div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="rm-dot">🌍</div>
+      <div class="rm-content">
+        <div class="rm-phase">Phase 6 · Year 2+</div>
+        <div class="rm-title">National Rollout</div>
+        <div class="rm-desc">Full national deployment. Launch premium adult tier to fund student free access indefinitely. Publish mental health impact data to drive policy change.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSION -->
+<section id="conclusion">
+  <p class="sec-label">07 — Conclusion</p>
+  <h2 class="sec-title">Every mind deserves a bridge</h2>
+  <p class="conclusion-quote">
+    "Even one saved life makes this idea successful. We're not building an app — we're building the support system no student should ever be without."
+  </p>
+  <p style="color: #8aaa90; font-size: 14px; letter-spacing: 1px;"></p>
+  <div class="team-chips">
+    <div class="chip">Amana · Founder & Developer</div>
+  </div>
+</section>
+
+<footer>MINDBRIDGE · MENTAL HEALTH SUPPORT APP </footer>
+
+<script>
+  // Intersection observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.roadmap-item, .problem-card, .feat, .exec-step, .ov-card').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
